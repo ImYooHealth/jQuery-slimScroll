@@ -496,7 +496,7 @@
         }
         
         function attachKeyBoardScroll(target)
-        {
+        { 
             // we need tabindex, else key events are not trapped,
         	$(me).add(bar).attr('tabindex', '-50').css({outline: 'none'});
         	$(me).add(bar).on('keydown.slimScroll', _onKeyDown);
@@ -507,9 +507,9 @@
           // calculate scrollbar height and make sure it is not too small
           barHeight = Math.max((me.outerHeight() / me[0].scrollHeight) * me.outerHeight(), minBarHeight);
           bar.css({ height: barHeight + 'px' });
-
-          // hide scrollbar if content is not long enough
-          var display = barHeight == me.outerHeight() ? 'none' : 'block';
+		 //alert(barHeight);
+		  // hide scrollbar if content is not long enough
+          var display = Math.ceil(barHeight) >= Math.ceil(me.outerHeight()-1) ? 'none' : 'block';
           bar.css({ display: display });
         }
 
@@ -539,9 +539,9 @@
           lastScroll = percentScroll;
 
           // show only when required
-          if(barHeight >= me.outerHeight()) {
-            //allow window scroll
-            releaseScroll = true;
+          if(Math.ceil(barHeight) >= Math.ceil(me.outerHeight()-1)) {
+			//allow window scroll
+			releaseScroll = true;
             return;
           }
           bar.stop(true,true).fadeIn('fast');
